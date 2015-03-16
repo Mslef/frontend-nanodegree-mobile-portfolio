@@ -1,0 +1,34 @@
+{
+  "name": "frontend-nanodegree-mobile-portfolio",
+  "version": "0.1.0",
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-autoprefixer": "^2.2.0",
+    "grunt-contrib-cssmin": "^0.12.2",
+    "grunt-contrib-jasmine": "~0.4.0",
+    "grunt-contrib-uglify": "~0.5.0",
+    "grunt-contrib-watch": "^0.6.1",
+    "grunt-pagespeed": "^0.4.1",
+    "grunt-responsive-images": "~0.1.5",
+    "load-grunt-tasks": "^3.1.0",
+    "ngrok": "^0.1.99"
+  },
+  "description": "Your challenge, if you wish to accept it (and we sure hope you will), is to optimize this online portfolio for speed! In particular, optimize the critical rendering path and make this page render as quickly as possible by applying the techniques you've picked up in the [Critical Rendering Path course](https://www.udacity.com/course/ud884).",
+  "main": "Gruntfile.js",
+  "dependencies": {
+    "grunt": "^0.4.5"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Mslef/frontend-nanodegree-mobile-portfolio.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Mslef/frontend-nanodegree-mobile-portfolio/issues"
+  },
+  "homepage": "https://github.com/Mslef/frontend-nanodegree-mobile-portfolio"
+}
