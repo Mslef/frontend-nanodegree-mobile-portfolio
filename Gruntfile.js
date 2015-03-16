@@ -60,9 +60,19 @@ module.exports = function(grunt) {
         } 
       },
      watch: {
-      files: ['css/*', 'js/*', 'img/*'],
-      tasks: ['cssmin', 'uglify', 'responsive_images', 'psi-ngrok']
-}
+      css:{
+        files: ['css/*'],
+      tasks: ['cssmin','psi-ngrok']
+    },
+    js:{
+          files: ['js/*'],
+          tasks: ['uglify', 'psi-ngrok']
+    },
+    img:{
+          files: ['img/*'],
+          tasks: ['responsive_images', 'psi-ngrok']
+    }
+  }
   });
 
   grunt.registerTask('psi-ngrok', 'Run pagespeed with ngrok', function() { 
