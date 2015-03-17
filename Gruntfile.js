@@ -4,7 +4,6 @@ module.exports = function(grunt) {
 
   require('load-grunt-tasks')(grunt);
 
-  // Project configuration.
   grunt.initConfig({
     pkg: grunt.file.readJSON('package.json'),
 
@@ -59,6 +58,8 @@ module.exports = function(grunt) {
           strategy: 'mobile' } 
         } 
       },
+
+    //Watch for changes in the images folder, JS or CSS files
      watch: {
       css:{
         files: ['css/*'],
@@ -75,6 +76,7 @@ module.exports = function(grunt) {
   }
   });
 
+  //funtion pulled from http://www.jamescryer.com/2014/06/12/grunt-pagespeed-and-ngrok-locally-testing/
   grunt.registerTask('psi-ngrok', 'Run pagespeed with ngrok', function() { 
     var done = this.async(); 
     var port = 8080;
@@ -88,8 +90,7 @@ module.exports = function(grunt) {
       done();
     }); 
   });
-
-  // Default task(s).
+  
   grunt.registerTask('default', ['responsive_images', 'cssmin:css', 'uglify:js', 'psi-ngrok']);
 
 };
