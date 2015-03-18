@@ -247,7 +247,10 @@ var nouns = Object.keys(pizzaNames.nouns);           // types of nouns for pizza
 
 
 
-//Controller for making random pizzas pizzas
+
+
+//Controller  
+//making random pizzas pizzas
 
 // Name generator pulled from http://saturdaykid.com/usernames/generator.html
 // Capitalizes first letter of each word
@@ -374,57 +377,43 @@ console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "
 var resizePizzas = function(size) { 
   window.performance.mark("mark_start_resize");   // User Timing API function
 
-  // Changes the value for the size of the pizza above the slider
-  function changeSliderLabel(size) {
+  // Changes the value for the size of the pizza above the slider and returns a percent width
+  // TODO: change to 3 sizes? no more xl?
+  function sizeSwitcher(size) {
     switch(size) {
       case "1":
         document.querySelector("#pizzaSize").innerHTML = "Small";
-        return;
+        return 0.25;
       case "2":
         document.querySelector("#pizzaSize").innerHTML = "Medium";
-        return;
+        return 0.3333;
       case "3":
         document.querySelector("#pizzaSize").innerHTML = "Large";
-        return;
+        return 0.5;
       default:
-        console.log("bug in changeSliderLabel");
+        console.log("bug in sizeSwitcher");
     }
   }
 
-  changeSliderLabel(size);
-
   // Returns the size difference to change a pizza element from one size to another. Called by changePizzaSlices(size).
   function determineDx (elem, size) {
-    var oldwidth = elem.offsetWidth;
     var windowwidth = document.querySelector("#randomPizzas").offsetWidth;
-    var oldsize = oldwidth / windowwidth;
-
-    // TODO: change to 3 sizes? no more xl?
-    // Changes the slider value to a percent width
-    function sizeSwitcher (size) {
-      switch(size) {
-        case "1":
-          return 0.25;
-        case "2":
-          return 0.3333;
-        case "3":
-          return 0.5;
-        default:
-          console.log("bug in sizeSwitcher");
-      }
-    }
+    var oldsize = elem / windowwidth;
 
     var newsize = sizeSwitcher(size);
     var dx = (newsize - oldsize) * windowwidth;
 
     return dx;
-  }
-
+    }
+  
   // Iterates through pizza elements on the page and changes their widths
   function changePizzaSizes(size) {
+    var containerOffset = 0;
+    containerOffset = document.querySelector(".randomPizzaContainer").offsetWidth;
+    var dx = determineDx(containerOffset, size);
+    var newwidth = ( containerOffset + dx) + 'px';
+
     for (var i = 0; i < document.querySelectorAll(".randomPizzaContainer").length; i++) {
-      var dx = determineDx(document.querySelectorAll(".randomPizzaContainer")[i], size);
-      var newwidth = (document.querySelectorAll(".randomPizzaContainer")[i].offsetWidth + dx) + 'px';
       document.querySelectorAll(".randomPizzaContainer")[i].style.width = newwidth;
     }
   }
@@ -437,8 +426,6 @@ var resizePizzas = function(size) {
   var timeToResize = window.performance.getEntriesByName("measure_pizza_resize");
   console.log("Time to resize pizzas: " + timeToResize[0].duration + "ms");
 };
-
-
 
 
 // Iterator for number of times the pizzas in the background have scrolled.
@@ -480,7 +467,7 @@ function updatePositions() {
 }
 
 // runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions());
+window.addEventListener('scroll', updatePositions);
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
