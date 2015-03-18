@@ -17,7 +17,6 @@ cameron *at* udacity *dot* com
 */
 
 // As you may have realized, this website randomly generates pizzas.
-// Here are arrays of all possible pizza ingredients.
 
 //Model for pizza ingredients
 var pizzaIngredients = {};
@@ -144,6 +143,8 @@ pizzaIngredients.crusts = [
   "Stuffed Crust"
 ];
 
+
+//Model for pizza names
 var pizzaNames = {
   "adjectives":{},
   "nouns":{}
@@ -246,11 +247,10 @@ var adjectives = Object.keys(pizzaNames.adjectives);  // types of adjectives for
 var nouns = Object.keys(pizzaNames.nouns);           // types of nouns for pizza titles
 
 
+//Controller to create pizzas and add them to the view, resize the pizzas with a slider and add background pizza wiggly effect when scrolling
 
 
-
-//Controller  
-//making random pizzas pizzas
+//Creating random pizzas pizzas
 
 // Name generator pulled from http://saturdaykid.com/usernames/generator.html
 // Capitalizes first letter of each word
@@ -275,14 +275,11 @@ function randomName() {
   return generator(adjectives[randomNumberAdj], nouns[randomNumberNoun]);
 }
 
-
-
 // Returns a string of a random ingredient from the inputed food type
 var selectRandom = function (foodType) {
   var food = pizzaIngredients[foodType][Math.floor((Math.random() * pizzaIngredients[foodType].length))];
   return food;
 };
-
 
 var ingredientItemizer = function(string) {
   return "<li>" + string + "</li>";
@@ -354,18 +351,14 @@ var pizzaElementGenerator = function(i) {
   return pizzaContainer;
 };
 
+//Append all pizzas to the page and measure time to append all
+window.performance.mark("start");
 
-//Interact with the view
-
-window.performance.mark("start"); // collect timing data
-
-// This for-loop actually creates and appends all of the pizzas when the page loads
 for (var i = 2; i < 100; i++) {
   var pizzasDiv = document.getElementById("randomPizzas");
   pizzasDiv.appendChild(pizzaElementGenerator(i));
 }
 
-// User Timing API again. These measurements tell you how long it took to generate the initial pizzas
 window.performance.mark("end");
 window.performance.measure("measure_pizza_generation", "start", "end");
 var timeToGenerate = window.performance.getEntriesByName("measure_pizza_generation");
@@ -375,7 +368,7 @@ console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "
 
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) { 
-  window.performance.mark("mark_start_resize");   // User Timing API function
+  window.performance.mark("mark_start_resize"); 
 
   // Changes the value for the size of the pizza above the slider and returns a percent width
   function sizeSwitcher(size) {
