@@ -351,8 +351,25 @@ var pizzaElementGenerator = function(i) {
   return pizzaContainer;
 };
 
-/*
-//TODO : check this function for performance
+
+//Interact with the view
+
+window.performance.mark("start"); // collect timing data
+
+// This for-loop actually creates and appends all of the pizzas when the page loads
+for (var i = 2; i < 100; i++) {
+  var pizzasDiv = document.getElementById("randomPizzas");
+  pizzasDiv.appendChild(pizzaElementGenerator(i));
+}
+
+// User Timing API again. These measurements tell you how long it took to generate the initial pizzas
+window.performance.mark("end");
+window.performance.measure("measure_pizza_generation", "start", "end");
+var timeToGenerate = window.performance.getEntriesByName("measure_pizza_generation");
+console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "ms");
+
+
+
 // resizePizzas(size) is called when the slider in the "Our Pizzas" section of the website moves.
 var resizePizzas = function(size) { 
   window.performance.mark("mark_start_resize");   // User Timing API function
@@ -421,20 +438,9 @@ var resizePizzas = function(size) {
   console.log("Time to resize pizzas: " + timeToResize[0].duration + "ms");
 };
 
-window.performance.mark("mark_start_generating"); // collect timing data
-*/
-// This for-loop actually creates and appends all of the pizzas when the page loads
-for (var i = 2; i < 100; i++) {
-  var pizzasDiv = document.getElementById("randomPizzas");
-  pizzasDiv.appendChild(pizzaElementGenerator(i));
-}
 
-// User Timing API again. These measurements tell you how long it took to generate the initial pizzas
-window.performance.mark("mark_end_generating");
-window.performance.measure("measure_pizza_generation", "mark_start_generating", "mark_end_generating");
-var timeToGenerate = window.performance.getEntriesByName("measure_pizza_generation");
-console.log("Time to generate pizzas on load: " + timeToGenerate[0].duration + "ms");
-/*
+
+
 // Iterator for number of times the pizzas in the background have scrolled.
 // Used by updatePositions() to decide when to log the average time per frame
 var frame = 0;
@@ -474,7 +480,7 @@ function updatePositions() {
 }
 
 // runs updatePositions on scroll
-window.addEventListener('scroll', updatePositions);
+window.addEventListener('scroll', updatePositions());
 
 // Generates the sliding pizzas when the page loads.
 document.addEventListener('DOMContentLoaded', function() {
@@ -492,4 +498,3 @@ document.addEventListener('DOMContentLoaded', function() {
   }
   updatePositions();
 });
-*/
