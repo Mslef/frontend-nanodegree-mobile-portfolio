@@ -4,8 +4,7 @@ Project optimized for Pagespeed Insights for both the portfolio page and for the
 
 
 *******************
-*    Pizza App    *
-*******************
+*    Pizza App    
 
 The pizza App was updated to maximize the FPS of the page. 3 main change were made to views/js/main.js : 
 
@@ -19,8 +18,8 @@ I also rewrote some functions to reduce code redundancy.
 
 
 ***************
-*    GRUNT    *
-***************
+*    GRUNT    
+
 To run grunt, first install node.js on the computer, then the grunt CLI, then run "npm intall" on the command line from the site's directory to intall all dependencies, and finally run the "grunt" command. Grunt will automatically minify images, js and CSS, and provided you have the site running on localhost:8080, run pagespeed with ngrok. Also possible to use the grunt watch command, which reacts to changes in the CSS, JS or img folders. 
 
 For the pizza app, run npm install and grunt from the command line from the views directory.
